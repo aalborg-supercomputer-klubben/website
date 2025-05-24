@@ -1,0 +1,36 @@
+:root {
+	--font-fancy: "JetBrains Mono Variable";
+
+	--accent: #94DDCA;
+	--accent-bg: #22332F;
+
+	color: white;
+	line-height: 1.6;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+.card {
+	display: block;
+	border: 1px solid #555555;
+	background-color: #111111;
+	padding: 1rem;
+}
+
+.card .card {
+	background-color: #080808;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-fancy);
+}
+
+a, a:visited {
+	color: var(--accent);
+}
+
+p:not(:has(+ *)) {
+	margin-bottom: 0;
+}

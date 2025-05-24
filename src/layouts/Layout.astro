@@ -1,3 +1,8 @@
+---
+import "../styles.css";
+import "@fontsource-variable/jetbrains-mono";
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -8,6 +13,63 @@
 		<title>Supercomputer-Klubben</title>
 	</head>
 	<body>
-		<slot />
+		<div id="container">
+			<header>
+				<nav>
+					<a id="navbar-title" href="/">Aalborg Supercomputer Club</a>
+					<ul>
+						<li>
+							<a href="/posts">Posts</a>
+						</li>
+						<li>
+							<a href="/projects">Projects</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+			<slot />
+		</div>
 	</body>
 </html>
+<style>
+	body {
+		background-color: black;
+		margin: 0;
+	}
+
+	#container {
+		margin: 0 auto 0 auto;
+		max-width: 1280px;
+		padding: 1rem;
+	}
+
+	header nav {
+		font-family: var(--font-fancy);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+	}
+
+	header a {
+		text-decoration: none;
+		color: inherit;
+		transition: color 0.2 ease-in;
+	}
+
+	header a:hover {
+		color: var(--accent);
+	}
+
+	header ul {
+		list-style: none;
+		padding-left: 0;
+		display: flex;
+		gap: 1.5rem;
+		font-size: 1.25rem;
+	}
+
+	#navbar-title {
+		font-size: 1.5rem;
+	}
+</style>

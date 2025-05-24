@@ -1,7 +1,187 @@
 ---
+import { Icon } from "astro-icon/components";
+
 import Layout from "../layouts/Layout.astro";
+import Logo from "../assets/logo.svg";
+import PostList from "../components/PostList.astro";
+
+const posts = [
+	{
+		title: "Post 3",
+		description: "Description 3",
+		date: new Date(2025, 4, 23),
+	},
+	{
+		title: "Post 2",
+		description: "Description 2",
+		date: new Date(2025, 4, 22),
+	},
+	{
+		title: "Post 1",
+		description: "Description 1",
+		date: new Date(2025, 4, 21),
+	},
+];
+
+const projects = [
+	{
+		title: "Project 3",
+		description: "Description 3",
+		date: new Date(2025, 4, 23),
+	},
+	{
+		title: "Project 2",
+		description: "Description 2",
+		date: new Date(2025, 4, 22),
+	},
+	{
+		title: "Project 1",
+		description: "Description 1",
+		date: new Date(2025, 4, 21),
+	},
+];
 ---
 
 <Layout>
-	<h1>Hello, World!</h1>
+	<main>
+		<div id="details">
+			<div id="details" class="card">
+				<Logo id="logo" />
+				<ul class="overview-list">
+					<li>
+						<Icon name="tabler:map-pin" />
+						Selma Lagerløfs Vej 300 <br />
+						9220 Aalborg East
+					</li>
+					<li>
+						<Icon name="tabler:door" />
+						Room 0.1.92
+					</li>
+				</ul>
+			</div>
+			<div id="socials" class="card">
+				<h2>Find us</h2>
+				<ul class="overview-list">
+					<li>
+						<a href="https://example.com">
+							<Icon name="tabler:brand-discord" />
+							Discord
+						</a>
+					</li>
+					<li>
+						<a
+							href="https://github.com/aalborg-supercomputer-klubben"
+						>
+							<Icon name="tabler:brand-github" />
+							GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://example.com">
+							<Icon name="tabler:brand-linkedin" />
+							LinkedIn
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="content">
+			<div class="card">
+				<h2 class="card-header">
+					<Icon name="tabler:users-group" />
+					About us
+				</h2>
+				<p>
+					We are the Aalborg Supercomputer Club, located at Aalborg
+					University's Department of Computer Science in Denmark.
+				</p>
+				<p>
+					The club was founded for participating in the Single-Board
+					Cluster Competition, in which the goal is to achieve the
+					best performance across a variety of benchmarks on a cluster
+					of single-board computers, with a power limit of just 250
+					watts. Between competitions, we like to play with hardware,
+					such constructing one big monitor from several smaller ones,
+					or maintaining our own rack servers in the department's
+					basement.
+				</p>
+				<p>
+					If you're a student at Aalborg University, and you're
+					interested, come check us out! We typically meet every
+					Wednesday during the semester at 15:00.
+				</p>
+			</div>
+			<div class="card">
+				<h2 class="card-header">
+					<Icon name="tabler:rss" />
+					Latest posts
+				</h2>
+				<PostList entries={posts} />
+			</div>
+			<div class="card">
+				<h2 class="card-header">
+					<Icon name="tabler:folder" />
+					Latest projects
+				</h2>
+				<PostList entries={projects} />
+			</div>
+		</div>
+	</main>
 </Layout>
+<style>
+	main {
+		display: grid;
+		grid-template-columns: 2fr 7fr;
+		gap: 1rem;
+	}
+
+	main > div {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	#logo {
+		width: 128px;
+		height: auto;
+		margin-bottom: 1rem;
+	}
+
+	#socials > h2 {
+		margin: 0 0 1rem 0;
+	}
+
+	.overview-list {
+		list-style: none;
+		padding-left: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin: 0;
+	}
+
+	.overview-list :is(li, a) {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.overview-list [data-icon] {
+		height: 2rem;
+		width: 2rem;
+		color: var(--accent);
+	}
+
+	.card-header {
+		margin: 0 0 1rem 0;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.card-header [data-icon] {
+		color: var(--accent);
+		width: 2rem;
+		height: 2rem;
+	}
+</style>
