@@ -127,15 +127,25 @@ const projects = [
 </Layout>
 <style>
 	main {
-		display: grid;
-		grid-template-columns: 2fr 7fr;
+		display: flex;
+		flex-direction: row;
 		gap: 1rem;
+	}
+
+	@media (max-width: 768px) {
+		main {
+			flex-direction: column;
+		}
 	}
 
 	main > div {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+	}
+
+	#details {
+		min-width: 18rem;
 	}
 
 	#logo {
@@ -167,6 +177,10 @@ const projects = [
 		height: 2rem;
 		width: 2rem;
 		color: var(--accent);
+	}
+
+	#content {
+		max-width: 56rem;
 	}
 
 	.card-header {
