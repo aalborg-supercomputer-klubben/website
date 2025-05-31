@@ -17,7 +17,11 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout>
+<Layout
+	title={post.data.title}
+	description={post.data.description}
+	publishedDate={post.data.date}
+>
 	<main id="post" class="card">
 		<h1>{post.data.title}</h1>
 		<div id="post-date">{formatDate(post.data.date)}</div>

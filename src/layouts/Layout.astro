@@ -1,6 +1,24 @@
 ---
 import "../styles.css";
+import logo from "../assets/logo.png?url";
 import "@fontsource-variable/jetbrains-mono";
+
+interface Props {
+	title?: string;
+	description?: string;
+	publishedDate?: Date;
+}
+
+function isoFormatDate(date: Date): string {
+	return `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
+}
+
+const { title, publishedDate } = Astro.props;
+const description =
+	Astro.props.description ??
+	"A university club for high-performance computing and other hardware shenanigans";
+
+const url = Astro.url.toString();
 ---
 
 <!doctype html>
@@ -10,7 +28,32 @@ import "@fontsource-variable/jetbrains-mono";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Supercomputer-Klubben</title>
+		<title>
+			{title != null ? title + " -" : ""} Aalborg Supercomputer Club
+		</title>
+		<meta name="description" content={description} />
+		<meta name="og:title" content={title ?? "Aalborg Supercomputer Club"} />
+		<meta name="og:type" content="website" />
+		<meta name="og:image" content={logo} />
+		<meta name="og:url" content={url} />
+		<meta name="og:description" content={description} />
+		{
+			title != null && (
+				<meta
+					name="og:site_name"
+					content="Aalborg Supercomputer Club"
+				/>
+			)
+		}
+		{
+			publishedDate != null && (
+				<meta
+					name="og:article:published_date"
+					content={isoFormatDate(publishedDate)}
+				/>
+			)
+		}
+		<meta name="og:section" content="Technology" />
 	</head>
 	<body>
 		<div id="container">
