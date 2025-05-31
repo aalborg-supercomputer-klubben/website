@@ -2,6 +2,7 @@
 import "../styles.css";
 import logo from "../assets/logo.png?url";
 import "@fontsource-variable/jetbrains-mono";
+import { Icon } from "astro-icon/components";
 
 interface Props {
 	title?: string;
@@ -71,6 +72,11 @@ const url = Astro.url.toString();
 				</nav>
 			</header>
 			<slot />
+			<footer>
+				Made with <a href="https://astro.build">Astro</a> | Inspired by <a
+					href="https://spectre.lou.gg/">Spectre</a
+				>
+			</footer>
 		</div>
 	</body>
 </html>
@@ -121,5 +127,10 @@ const url = Astro.url.toString();
 
 	#navbar-title {
 		font-size: 1.5rem;
+	}
+
+	footer {
+		color: #aaaaaa;
+		padding-top: 1rem;
 	}
 </style>
