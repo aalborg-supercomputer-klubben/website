@@ -4,40 +4,37 @@ import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
 import Logo from "../assets/logo.svg";
 import PostList from "../components/PostList.astro";
+import { getCollection } from "astro:content";
 
-const posts = [
-	{
-		title: "Post 3",
-		description: "Description 3",
-		date: new Date(2025, 4, 23),
-	},
-	{
-		title: "Post 2",
-		description: "Description 2",
-		date: new Date(2025, 4, 22),
-	},
-	{
-		title: "Post 1",
-		description: "Description 1",
-		date: new Date(2025, 4, 21),
-	},
-];
+const allPosts = await getCollection("posts");
+const latestPosts = allPosts
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3);
 
 const projects = [
 	{
-		title: "Project 3",
-		description: "Description 3",
-		date: new Date(2025, 4, 23),
+		id: "project-1",
+		data: {
+			title: "Project 3",
+			description: "Description 3",
+			date: new Date(2025, 4, 23),
+		},
 	},
 	{
-		title: "Project 2",
-		description: "Description 2",
-		date: new Date(2025, 4, 22),
+		id: "project-1",
+		data: {
+			title: "Project 2",
+			description: "Description 2",
+			date: new Date(2025, 4, 22),
+		},
 	},
 	{
-		title: "Project 1",
-		description: "Description 1",
-		date: new Date(2025, 4, 21),
+		id: "project-1",
+		data: {
+			title: "Project 1",
+			description: "Description 1",
+			date: new Date(2025, 4, 21),
+		},
 	},
 ];
 ---
@@ -116,14 +113,14 @@ const projects = [
 					<Icon name="tabler:rss" />
 					Latest posts
 				</h2>
-				<PostList entries={posts} />
+				<PostList entries={latestPosts} urlBase="/posts/" />
 			</div>
 			<div class="card">
 				<h2 class="card-header">
 					<Icon name="tabler:folder" />
 					Latest projects
 				</h2>
-				<PostList entries={projects} />
+				<PostList entries={projects} urlBase="/projects/" />
 			</div>
 		</div>
 	</main>

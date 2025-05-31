@@ -3,25 +3,31 @@ import { formatDate } from "../utils";
 
 interface Props {
 	entries: {
-		title: string;
-		description: string;
-		date: Date;
+		id: string;
+		data: {
+			title: string;
+			description: string;
+			date: Date;
+		};
 	}[];
+	urlBase: string;
 }
 
-const { entries } = Astro.props;
+const { entries, urlBase } = Astro.props;
 ---
 
 <ul class="post-list">
 	{
 		entries.map((entry) => (
 			<li>
-				<a class="card" href="https://example.com">
+				<a class="card" href={urlBase + entry.id}>
 					<div class="post-header">
-						<div class="post-title">{entry.title}</div>
-						<div class="post-date">{formatDate(entry.date)}</div>
+						<div class="post-title">{entry.data.title}</div>
+						<div class="post-date">
+							{formatDate(entry.data.date)}
+						</div>
 					</div>
-					<div>{entry.description}</div>
+					<div>{entry.data.description}</div>
 				</a>
 			</li>
 		))

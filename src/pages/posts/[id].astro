@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../utils";
+import { Icon } from "astro-icon/components";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("posts");
+
+	return posts.map((post) => ({
+		params: { id: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout>
+	<main id="post" class="card">
+		<h1>{post.data.title}</h1>
+		<div id="post-date">{formatDate(post.data.date)}</div>
+		<Content />
+	</main>
+</Layout>
+<style>
+	#post {
+		max-width: 768px;
+		width: 100%;
+	}
+
+	#post-date {
+		font-family: var(--font-fancy);
+		color: #aaaaaa;
+		margin-bottom: 1.5rem;
+	}
+
+	h1 {
+		font-size: 2rem;
+		margin: 0.5rem 0 0.5rem 0;
+	}
+</style>
