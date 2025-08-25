@@ -34,3 +34,10 @@ a, a:visited {
 p:not(:has(+ *)) {
 	margin-bottom: 0;
 }
+
+.astro-code {
+	padding: 1rem;
+	border: 1px solid #444444;
+	font-size: 0.875rem;
+	tab-size: 4ch;
+}

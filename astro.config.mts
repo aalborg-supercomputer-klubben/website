@@ -6,5 +6,10 @@ import icon from "astro-icon";
 export default defineConfig({
 	integrations: [
 		icon()
-	]
+	],
+	markdown: {
+		shikiConfig: {
+			theme: "houston"
+		}
+	}
 });
