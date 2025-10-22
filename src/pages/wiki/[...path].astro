@@ -1,7 +1,10 @@
 ---
+import { execSync } from "child_process";
+
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import WikiSidebar from "../../components/WikiSidebar.astro";
+import { formatDate } from "../../utils";
 
 export async function getStaticPaths() {
 	const wiki = await getCollection("wiki");
@@ -14,6 +17,13 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
+
+// The path is unverified, but trustworthy, because it comes from our own content.
+const lastEditedTimestamp = execSync(
+	`git log -1 --pretty=%ct ` + page.filePath,
+).toString();
+// The output is a Unix timestamp in seconds, but `Date` expects one in miliseconds.
+const lastEditedDate = new Date(parseInt(lastEditedTimestamp) * 1000);
 ---
 
 <Layout title={page.data.title}>
@@ -23,7 +33,7 @@ const { Content } = await render(page);
 		</aside>
 		<main id="content" class="card">
 			<h1>{page.data.title}</h1>
-
+			<p id="last-edited">Last edited on {formatDate(lastEditedDate)}</p>
 			<Content />
 		</main>
 	</div>
@@ -40,5 +50,17 @@ const { Content } = await render(page);
 
 	#content {
 		width: 56rem;
+	}
+
+	h1 {
+		font-size: 2rem;
+		margin: 0.5rem 0 0.5rem 0;
+	}
+
+	#last-edited {
+		font-family: var(--font-fancy);
+		color: #aaaaaa;
+		margin-top: 0;
+		margin-bottom: 1rem;
 	}
 </style>
