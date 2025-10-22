@@ -1,0 +1,62 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import WikiSidebarSublist from "./WikiSidebarSublist.astro";
+
+interface Props {
+	currentPageId: string;
+}
+
+export interface SidebarEntry {
+	page: CollectionEntry<"wiki">;
+	children: Record<string, SidebarEntry>;
+}
+
+interface SidebarEntryOptionalPage {
+	page?: CollectionEntry<"wiki">;
+	children: Record<string, SidebarEntryOptionalPage>;
+}
+
+const { currentPageId } = Astro.props;
+
+const sidebarTree: Record<string, SidebarEntryOptionalPage> = {};
+
+const wiki = await getCollection("wiki");
+for (const page of wiki) {
+	const pathSegments = page.id.split("/");
+
+	let current: SidebarEntryOptionalPage = { children: sidebarTree };
+	for (const pathSegment of pathSegments) {
+		if (current.children[pathSegment] == null) {
+			current.children[pathSegment] = { children: {} };
+		}
+		current = current.children[pathSegment];
+	}
+	current.page = page;
+}
+
+function checkAllChildrenHavePage(
+	basePath: string,
+	entries: Record<string, SidebarEntryOptionalPage>,
+): asserts entries is Record<string, SidebarEntry> {
+	for (const [name, child] of Object.entries(entries)) {
+		const path = `${basePath}/${name}`;
+		if (child.page == null) {
+			throw new Error(
+				`The wiki folder \`${path}\` lacks a corresponding page. All folders must have such a page.`,
+			);
+		}
+		checkAllChildrenHavePage(path, child.children);
+	}
+}
+
+checkAllChildrenHavePage("", sidebarTree);
+
+const sidebarEntries = Object.values(sidebarTree);
+---
+
+<div id="sidebar-inner">
+	<WikiSidebarSublist
+		currentPageId={currentPageId}
+		entries={sidebarEntries}
+	/>
+</div>

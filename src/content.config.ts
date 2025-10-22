@@ -17,5 +17,12 @@ const projects = defineCollection({
 		date: z.coerce.date()
 	})
 });
+const wiki = defineCollection({
+	loader: glob({ pattern: "**/*.md", base: "./src/content/wiki" }),
+	schema: z.object({
+		title: z.string(),
+		priority: z.number().nonnegative().optional()
+	})
+});
 
-export const collections = { posts, projects };
+export const collections = { posts, projects, wiki };

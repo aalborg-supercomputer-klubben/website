@@ -1,0 +1,74 @@
+---
+import type { SidebarEntry } from "./WikiSidebar.astro";
+
+interface Props {
+	currentPageId: string;
+	entries: SidebarEntry[];
+}
+
+const { currentPageId, entries } = Astro.props;
+
+const sortedEntries = entries.sort((a, b) => {
+	const priorityA = a.page.data.priority ?? 0;
+	const priorityB = b.page.data.priority ?? 0;
+	const difference = priorityB - priorityA;
+
+	return difference != 0
+		? difference
+		: a.page.data.title.localeCompare(b.page.data.title, "en-US");
+});
+---
+
+<ul class="sidebar-sublist">
+	{
+		sortedEntries.map((entry) => (
+			<li>
+				<a
+					href={"/wiki/" + entry.page.id}
+					aria-current={
+						currentPageId == entry.page.id ? "page" : null
+					}
+				>
+					{entry.page.data.title}
+				</a>
+				{Object.values(entry.children).length != 0 && (
+					<Astro.self
+						currentPageId={currentPageId}
+						entries={Object.values(entry.children)}
+					/>
+				)}
+			</li>
+		))
+	}
+</ul>
+<style>
+	.sidebar-sublist {
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.sidebar-sublist li {
+		list-style: none;
+	}
+
+	.sidebar-sublist li a {
+		display: block;
+		padding: 0.5rem;
+		color: #aaaaaa;
+	}
+
+	.sidebar-sublist li a:hover {
+		color: white;
+	}
+
+	.sidebar-sublist li a[aria-current="page"] {
+		background-color: var(--accent);
+		color: black;
+	}
+
+	.sidebar-sublist li ul {
+		margin-left: 1rem;
+	}
+</style>

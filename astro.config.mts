@@ -11,5 +11,8 @@ export default defineConfig({
 		shikiConfig: {
 			theme: "houston"
 		}
+	},
+	redirects: {
+		"/wiki": "/wiki/welcome"
 	}
 });

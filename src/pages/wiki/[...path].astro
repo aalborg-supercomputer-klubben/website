@@ -1,0 +1,44 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import WikiSidebar from "../../components/WikiSidebar.astro";
+
+export async function getStaticPaths() {
+	const wiki = await getCollection("wiki");
+
+	return wiki.map((page) => ({
+		params: { path: page.id },
+		props: { page },
+	}));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<Layout title={page.data.title}>
+	<div id="wiki">
+		<aside id="sidebar" class="card">
+			<WikiSidebar currentPageId={page.id} />
+		</aside>
+		<main id="content" class="card">
+			<h1>{page.data.title}</h1>
+
+			<Content />
+		</main>
+	</div>
+</Layout>
+<style>
+	#wiki {
+		display: flex;
+		gap: 1rem;
+	}
+
+	#sidebar {
+		width: 18rem;
+	}
+
+	#content {
+		width: 56rem;
+	}
+</style>
