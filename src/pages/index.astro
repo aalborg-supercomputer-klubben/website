@@ -10,33 +10,6 @@ const allPosts = await getCollection("posts");
 const latestPosts = allPosts
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
-
-const projects = [
-	{
-		id: "project-1",
-		data: {
-			title: "Project 3",
-			description: "Description 3",
-			date: new Date(2025, 4, 23),
-		},
-	},
-	{
-		id: "project-1",
-		data: {
-			title: "Project 2",
-			description: "Description 2",
-			date: new Date(2025, 4, 22),
-		},
-	},
-	{
-		id: "project-1",
-		data: {
-			title: "Project 1",
-			description: "Description 1",
-			date: new Date(2025, 4, 21),
-		},
-	},
-];
 ---
 
 <Layout>
@@ -114,13 +87,6 @@ const projects = [
 					Latest posts
 				</h2>
 				<PostList entries={latestPosts} urlBase="/posts/" />
-			</div>
-			<div class="card">
-				<h2 class="card-header">
-					<Icon name="tabler:folder" />
-					Latest projects
-				</h2>
-				<PostList entries={projects} urlBase="/projects/" />
 			</div>
 		</div>
 	</main>

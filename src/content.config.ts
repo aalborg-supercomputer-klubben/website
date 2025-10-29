@@ -9,14 +9,6 @@ const posts = defineCollection({
 		date: z.coerce.date()
 	})
 });
-const projects = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		date: z.coerce.date()
-	})
-});
 const wiki = defineCollection({
 	loader: glob({ pattern: "**/*.md", base: "./src/content/wiki" }),
 	schema: z.object({
@@ -25,4 +17,4 @@ const wiki = defineCollection({
 	})
 });
 
-export const collections = { posts, projects, wiki };
+export const collections = { posts, wiki };
