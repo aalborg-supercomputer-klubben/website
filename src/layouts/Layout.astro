@@ -3,6 +3,7 @@ import "../styles.css";
 import logo from "../assets/logo.png?url";
 import "@fontsource-variable/jetbrains-mono";
 import { Icon } from "astro-icon/components";
+import Header from "../components/Header.astro";
 
 interface Props {
 	title?: string;
@@ -58,19 +59,7 @@ const url = Astro.url.toString();
 	</head>
 	<body>
 		<div id="container">
-			<header>
-				<nav>
-					<a id="navbar-title" href="/">Aalborg Supercomputer Club</a>
-					<ul>
-						<li>
-							<a href="/posts">Posts</a>
-						</li>
-						<li>
-							<a href="/wiki">Wiki</a>
-						</li>
-					</ul>
-				</nav>
-			</header>
+			<Header />
 			<slot />
 			<footer>
 				Made with <a href="https://astro.build">Astro</a>
@@ -92,40 +81,6 @@ const url = Astro.url.toString();
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
-
-	header {
-		width: 100%;
-	}
-
-	header nav {
-		font-family: var(--font-fancy);
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 1rem;
-	}
-
-	header a {
-		text-decoration: none;
-		color: inherit;
-		transition: color 0.2 ease-in;
-	}
-
-	header a:hover {
-		color: var(--accent);
-	}
-
-	header ul {
-		list-style: none;
-		padding-left: 0;
-		display: flex;
-		gap: 1.5rem;
-		font-size: 1.25rem;
-	}
-
-	#navbar-title {
-		font-size: 1.5rem;
 	}
 
 	footer {

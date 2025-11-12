@@ -1,0 +1,48 @@
+<header>
+	<nav>
+		<a id="navbar-title" href="/">Aalborg Supercomputer Club</a>
+		<ul>
+			<li>
+				<a href="/posts">Posts</a>
+			</li>
+			<li>
+				<a href="/wiki">Wiki</a>
+			</li>
+		</ul>
+	</nav>
+</header>
+<style>
+	header {
+		width: 100%;
+	}
+
+	header nav {
+		font-family: var(--font-fancy);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+	}
+
+	header a {
+		text-decoration: none;
+		color: inherit;
+		transition: color 0.2 ease-in;
+	}
+
+	header a:hover {
+		color: var(--accent);
+	}
+
+	header ul {
+		list-style: none;
+		padding-left: 0;
+		display: flex;
+		gap: 1.5rem;
+		font-size: 1.25rem;
+	}
+
+	#navbar-title {
+		font-size: 1.5rem;
+	}
+</style>
