@@ -55,6 +55,14 @@ const latestPosts = allPosts
 					</li>
 				</ul>
 			</div>
+			<div id="calendar" class="card">
+				<h2>Calendar</h2>
+				<iframe
+					src="https://calendar.google.com/calendar/embed?height=400&wkst=1&ctz=Europe%2FCopenhagen&showPrint=0&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showTabs=0&showCalendars=0&showTz=0&src=N2MyNjgyMDA4NjEwYjczZDMxNTY1YWRhM2M3M2E5YzVkOGMwYzA3NWE1YTgzNDJhMTZlNjU0Y2YwNGFhN2ZmNkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23616161"
+					style="border: 0"
+					frameborder="0"
+					scrolling="no"></iframe>
+			</div>
 		</div>
 		<div id="content">
 			<div class="card">
@@ -121,8 +129,13 @@ const latestPosts = allPosts
 		margin-bottom: 1rem;
 	}
 
-	#socials > h2 {
+	:is(#socials, #calendar) > h2 {
 		margin: 0 0 1rem 0;
+	}
+
+	#calendar > iframe {
+		height: 25rem;
+		border: none;
 	}
 
 	.overview-list {
