@@ -1,3 +1,5 @@
+@import "@fontsource-variable/jetbrains-mono";
+
 :root {
 	--font-fancy: "JetBrains Mono Variable";
 
@@ -6,6 +8,8 @@
 
 	color: white;
 	line-height: 1.6;
+
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 *, *::before, *::after {
