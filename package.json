@@ -10,9 +10,9 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@fontsource-variable/jetbrains-mono": "^5.2.5",
-		"@iconify-json/tabler": "^1.2.18",
-		"astro": "^5.7.14",
-		"astro-icon": "^1.1.5"
+		"@fontsource-variable/jetbrains-mono": "^5.3.0",
+		"@iconify-json/tabler": "^1.2.46",
+		"astro": "^7.4.12",
+		"astro-icon": "^1.2.0"
 	}
 }
